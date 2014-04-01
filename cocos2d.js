@@ -29,7 +29,7 @@
     var c = {
         COCOS2D_DEBUG:2, //0 to turn debug off, 1 for basic debug, and 2 for full debug
         box2d:false,
-        chipmunk:false,
+        chipmunk:true,
         showFPS:true,
         loadExtension:false,
         frameRate:60,
@@ -43,7 +43,8 @@
             'src/AnimationLayer.js',
             'src/BackgroundLayer.js',
             'src/PlayScene.js',
-            'src/StatusLayer.js'
+            'src/StatusLayer.js',
+            'src/globals.js'
 
             //add your own files in order here
         ]
