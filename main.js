@@ -49,23 +49,7 @@ var cocos2dApp = cc.Application.extend({
         searchPaths.push("res");
         cc.FileUtils.getInstance().setSearchPaths(searchPaths);
 
-        var platform = cc.Application.getInstance().getTargetPlatform();
-        if (platform == cc.TARGET_PLATFORM.MOBILE_BROWSER) {
-            resDirOrders.push("HD");
-        }
-        else if (platform == cc.TARGET_PLATFORM.PC_BROWSER) {
-            if (screenSize.height >= 800) {
-                resDirOrders.push("HD");
-            }
-            else {
-                resourceSize = cc.size(320, 480);
-                designSize = cc.size(320, 480);
-                resDirOrders.push("Normal");
-            }
-        }
-
-        cc.FileUtils.getInstance().setSearchResolutionsOrder(resDirOrders);
-        director.setContentScaleFactor(resourceSize.width / designSize.width);
+       
         cc.EGLView.getInstance().setDesignResolutionSize(designSize.width, designSize.height, cc.RESOLUTION_POLICY.SHOW_ALL);
         cc.EGLView.getInstance().resizeWithBrowserSize(true);
 
