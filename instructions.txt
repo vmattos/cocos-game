@@ -1,0 +1,135 @@
+1 - Cocos template
+2 - scene / layer / sprite
+3 - Layer:
+	cc.Layer -> Recebe touch events
+	Layers pré definidos -> cc.Menu, cc.ColorLayer...
+4 - Coordenadas cartesianas
+5 - anchor point
+6 - Action -> position, scale, rotation, visibility, opacity, color
+7 - animation
+
+8 - deletar resources padrões e importar os customizados
+9 - main.js -> deletar de var plataform até director.setContentScaleFactor(...)
+10 - MyApp.js -> deletar tudo
+11 - main.js-> new cocos2dApp(MyScene) -> (MenuScene)
+12 - Definindo a MenuScene:
+	12.1 - MyApp.js:
+		var MenuLayer = cc.Layer.extend({
+  		  ctor : function(){
+		        this._super();
+		    },
+		    init:function(){
+		        this._super();
+
+		        var director = cc.Director.getInstance();
+
+		        var winsize = director.getWinSize();
+		        var centerpos = cc.p(winsize.width / 2, winsize.height / 2);
+
+		        var spritebg = cc.Sprite.create(s_HelloBG);
+		        spritebg.setPosition(centerpos);
+		        this.addChild(spritebg);
+
+		        cc.MenuItemFont.setFontSize(60);
+
+		        var menuItemPlay= cc.MenuItemSprite.create(
+		            cc.Sprite.create(s_start_n), // normal state image
+		            cc.Sprite.create(s_start_s), //select state image
+		            this.onPlay, this);
+		        var menu = cc.Menu.create(menuItemPlay);  //7. create the menu
+		        menu.setPosition(centerpos);
+		        this.addChild(menu);
+		    },
+
+		    onPlay : function(){
+		       cc.log('onPlay')
+		    }
+		});
+
+		var MenuScene = cc.Scene.extend({
+		    onEnter:function () {
+		        this._super();
+		        var layer = new MenuLayer();
+		        layer.init();
+		        this.addChild(layer);
+		    }
+		});
+
+13 - PlayScene:
+	13.1 - 
+		var PlayScene = cc.Scene.extend({
+		    onEnter:function () {
+		        this._super();
+		        //add three layer in the right order
+		        this.addChild(new BackgroundLayer());
+		        this.addChild(new AnimationLayer());
+		        this.addChild(new StatusLayer());
+		    }
+		});
+
+	13.2 - 
+		var BackgroundLayer = cc.Layer.extend({
+		    ctor:function () {
+		        this._super();
+		        this.init();
+		    },
+
+		    init:function () {
+		        this._super();
+
+		        var winSize = cc.Director.getInstance().getWinSize();
+		        //create the background image and position it at the center of screen
+		        var centerPos = cc.p(winSize.width / 2, winSize.height / 2);
+		        var spriteBG = cc.Sprite.create(s_PlayBG);
+		        spriteBG.setPosition(centerPos);
+		        this.addChild(spriteBG);
+		    }
+		});
+
+	13.3 - 
+		var AnimationLayer = cc.Layer.extend({
+		    ctor:function () {
+		        this._super();
+		        this.init();
+		    },
+		    init:function () {
+		        this._super();
+
+		        var winsize = cc.Director.getInstance().getWinSize();
+
+		        var centerPos = cc.p(80, 85);
+		        //cerate the hero sprite
+		        var spriteRunner = cc.Sprite.create(s_runner);
+		        spriteRunner.setPosition(centerPos);
+
+		        //create the move action
+		        var actionTo = cc.MoveTo.create(2, cc.p(300, 85));
+		        spriteRunner.runAction(cc.Sequence.create(actionTo));
+		        this.addChild(spriteRunner);
+		    }
+		});
+
+	13.4 -
+		var StatusLayer = cc.Layer.extend({
+		    labelCoin:null,
+		    labelMeter:null,
+		    coins:0,
+
+		    ctor:function () {
+		        this._super();
+		        this.init();
+		    },
+
+		    init:function () {
+		        this._super();
+
+		        this.labelCoin = cc.LabelTTF.create("Coins:0", "Helvetica", 20);
+		        this.labelCoin.setColor(cc.c3(0,0,0));//black color
+		        this.labelCoin.setPosition(cc.p(70, winSize.height - 20));
+		        this.addChild(this.labelCoin);
+
+		        this.labelMeter = cc.LabelTTF.create("0M", "Helvetica", 20);
+		        this.labelMeter.setPosition(cc.p(winSize.width - 70, winSize.height - 20));
+		        this.addChild(this.labelMeter);
+		    }
+		});
