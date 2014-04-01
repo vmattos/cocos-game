@@ -160,3 +160,8 @@
 
 			//4.wrap the animate action with a repeat forever action
 			this.runningAction = cc.RepeatForever.create(cc.Animate.create(animation));
+			this.sprite = cc.Sprite.createWithSpriteFrameName("runner0.png");
+	        this.sprite.setPosition(cc.p(80, 85));
+	        this.sprite.runAction(this.runningAction);
+	        this.runAction(cc.Sequence.create(actionTo));
+	        this.spriteSheet.addChild(this.sprite);
