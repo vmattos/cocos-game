@@ -133,3 +133,30 @@
 		        this.addChild(this.labelMeter);
 		    }
 		});
+
+14 - import running.png e running.plist!
+	14.1 - lembrar de alterar o caminho do personagem para running
+
+15 - AnimationLayer:
+	15.1 - var AnimationLayer = cc.Layer.extend({
+			   spriteSheet: null,
+			   runningAction: null,
+			   sprite: null,
+
+	15.2 - this.sprite = cc.Sprite.createWithSpriteFrameName("runner0.png");
+
+	15.3 -  //1.load spritesheet 
+			cc.SpriteFrameCache.getInstance().addSpriteFrames(s_runnerplist);
+
+			//2.create spriteframe array
+			var animFrames = [];
+			for (var i = 0; i < 8; i++) {
+			    var str = "runner" + i + ".png";
+			    var frame = cc.SpriteFrameCache.getInstance().getSpriteFrame(str);
+			    animFrames.push(frame);
+			}
+			//3.create a animation with the spriteframe array along with a period time
+			var animation = cc.Animation.create(animFrames, 0.1);
+
+			//4.wrap the animate action with a repeat forever action
+			this.runningAction = cc.RepeatForever.create(cc.Animate.create(animation));
