@@ -1,4 +1,4 @@
-var s_HelloBG = "helloBG.jpg";
+var s_HelloBG = "helloBG.png";
 var s_start_n = "start_n.png";
 var s_start_s = "start_s.png";
 
