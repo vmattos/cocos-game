@@ -5,6 +5,9 @@ var AnimationLayer = cc.Layer.extend({
     ctor:function (space) {
         this._super();
         this.space = space;
+        this._debugNode = cc.PhysicsDebugNode.create(this.space);
+        // Parallax ratio and offset
+        this.addChild(this._debugNode, 10);
         this.init();
     },
 
