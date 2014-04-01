@@ -39,7 +39,13 @@
         //SingleEngineFile:'',
         appFiles:[
             'src/resource.js',
-            'src/myApp.js'//add your own files in order here
+            'src/myApp.js',
+            'src/AnimationLayer.js',
+            'src/BackgroundLayer.js',
+            'src/PlayScene.js',
+            'src/StatusLayer.js'
+
+            //add your own files in order here
         ]
     };
 

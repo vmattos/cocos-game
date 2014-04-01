@@ -34,7 +34,8 @@ var MenuLayer = cc.Layer.extend({
     },
 
     onPlay : function(){
-        cc.log("==onplay clicked");
+        var director = cc.Director.getInstance();
+        director.replaceScene(new PlayScene());
     }
 });
 
